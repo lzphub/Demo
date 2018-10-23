@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
     @Override
     protected void initComponents() {
         probemPresenter.attachView(this);
-        setStatusBarAndToolBar(true, true, Color.WHITE);
+        setStatusBarAndToolBar(true, true, 0);
         probemPresenter.getData();
     }
 
@@ -50,22 +50,18 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
         problemBean = probemPresenter.getProblemBean2();
         problemBean.setTitle("问题分类");
         problemExplistview.setAdapter(new MainExpListViewAdapter(problemBean, this));
-        problemRecyclerview.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(problemBean.getQuestions().get(0),this);
+        problemRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(problemBean.getQuestions().get(0), this);
         problemRecyclerview.setAdapter(mainRecyclerViewAdapter);
-        int groupCount = problemExplistview.getCount();
-        for (int i = 0; i < groupCount; i++) {
-            //默认展开
-            problemExplistview.expandGroup(i);
-        }
+        //默认展开
+        problemExplistview.expandGroup(0);
+
         problemExplistview.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
                 mainRecyclerViewAdapter.setData(problemBean.getQuestions().get(i1));
-                for (int n = 0; n < groupCount; n++) {
-                    //点击关闭
-                    problemExplistview.collapseGroup(n);
-                }
+                //点击关闭
+                problemExplistview.collapseGroup(0);
                 return false;
             }
         });
