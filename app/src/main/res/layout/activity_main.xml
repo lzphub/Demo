@@ -5,12 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/bg_color"
     tools:context=".MainActivity">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_top"
+        android:background="@color/colorPrimary"></View>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/heigh_title"
-        android:layout_marginTop="@dimen/title_top">
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:layout_width="@dimen/back_size"
@@ -35,22 +40,13 @@
 
     <ExpandableListView
         android:id="@+id/problem_explistview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:groupIndicator="@null"
-        android:overScrollMode="never"
-        android:childDivider="@android:color/transparent"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="#f5f5f5"></View>
+        android:childDivider="@android:color/transparent"
+        style="@style/listview_style" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/problem_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:overScrollMode="never"
-        android:scrollbars="none" ></android.support.v7.widget.RecyclerView>
+        android:layout_marginTop="@dimen/back_left"
+        style="@style/listview_style"></android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

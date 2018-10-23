@@ -1,5 +1,6 @@
 package cn.dankal.demo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,7 +40,7 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
     @Override
     protected void initComponents() {
         probemPresenter.attachView(this);
-        setStatusBarAndToolBar(true, true, 0);
+        setStatusBarAndToolBar(true, true, Color.WHITE);
         probemPresenter.getData();
     }
 
@@ -50,14 +51,13 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
         problemBean.setTitle("问题分类");
         problemExplistview.setAdapter(new MainExpListViewAdapter(problemBean, this));
         problemRecyclerview.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(this);
+        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(problemBean.getQuestions().get(0),this);
         problemRecyclerview.setAdapter(mainRecyclerViewAdapter);
         int groupCount = problemExplistview.getCount();
         for (int i = 0; i < groupCount; i++) {
             //默认展开
             problemExplistview.expandGroup(i);
         }
-        mainRecyclerViewAdapter.setData(problemBean.getQuestions().get(0));
         problemExplistview.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {

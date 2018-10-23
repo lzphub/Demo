@@ -16,7 +16,8 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     private ProblemBean.QuestionsBeanX questionsBean;
     private Context context;
 
-    public MainRecyclerViewAdapter(Context context) {
+    public MainRecyclerViewAdapter(ProblemBean.QuestionsBeanX questionsBean,Context context) {
+        this.questionsBean=questionsBean;
         this.context = context;
     }
     public void setData(ProblemBean.QuestionsBeanX questionsBean){
