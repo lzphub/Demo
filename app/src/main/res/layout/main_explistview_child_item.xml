@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="70dp">
+    android:layout_height="@dimen/item_size">
     <TextView
         android:id="@+id/child_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="20dp"
-        android:textSize="15dp"
+        style="@style/item_text"
         android:text="常见问题"
-        android:textStyle="bold"
+        android:textSize="@dimen/chile_item_texe_size"
         android:textColor="#999999"/>
 </RelativeLayout>

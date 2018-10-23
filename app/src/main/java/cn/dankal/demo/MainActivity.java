@@ -29,8 +29,7 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
     RecyclerView problemRecyclerview;
     private ProblemPresnter probemPresenter = new ProblemPresnter();
     private ProblemBean problemBean = ProblemBean.getProblemBean();
-    private ExpandBean expandBean = ExpandBean.getExpandBean();
-
+    private MainRecyclerViewAdapter mainRecyclerViewAdapter;
 
     @Override
     protected int contentViewLayoutResId() {
@@ -42,25 +41,22 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
         probemPresenter.attachView(this);
         setStatusBarAndToolBar(true, true, 0);
         probemPresenter.getData();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        problemRecyclerview.setLayoutManager(linearLayoutManager);
     }
 
     //数据填充显示
     @Override
     public void getDataSuccess() {
         problemBean = probemPresenter.getProblemBean2();
-        expandBean.setQuestions(problemBean.getQuestions());
-        problemExplistview.setAdapter(new MainExpListViewAdapter(expandBean, this));
+        problemBean.setTitle("问题分类");
+        problemExplistview.setAdapter(new MainExpListViewAdapter(problemBean, this));
+        problemRecyclerview.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(this);
+        problemRecyclerview.setAdapter(mainRecyclerViewAdapter);
         int groupCount = problemExplistview.getCount();
         for (int i = 0; i < groupCount; i++) {
             //默认展开
             problemExplistview.expandGroup(i);
         }
-        ;
-        MainRecyclerViewAdapter mainRecyclerViewAdapter = new MainRecyclerViewAdapter(this);
-        problemRecyclerview.setAdapter(mainRecyclerViewAdapter);
         mainRecyclerViewAdapter.setData(problemBean.getQuestions().get(0));
         problemExplistview.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -70,7 +66,6 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
                     //点击关闭
                     problemExplistview.collapseGroup(n);
                 }
-                ;
                 return false;
             }
         });

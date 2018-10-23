@@ -15,11 +15,11 @@ import cn.dankal.demo.bean.ProblemBean;
 
 public class MainExpListViewAdapter extends BaseExpandableListAdapter {
 
-    private ExpandBean expandBean;
+    private ProblemBean problemBean;
     private Context context;
 
-    public MainExpListViewAdapter(ExpandBean expandBean, Context context) {
-        this.expandBean = expandBean;
+    public MainExpListViewAdapter(ProblemBean problemBean, Context context) {
+        this.problemBean = problemBean;
         this.context = context;
     }
 
@@ -30,18 +30,17 @@ public class MainExpListViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int i) {
-        return expandBean.getQuestions().size();
+        return problemBean.getQuestions().size();
     }
 
     @Override
     public Object getGroup(int i) {
-        return expandBean.getTitle();
+        return problemBean.getTitle();
     }
 
     @Override
     public Object getChild(int i, int i1) {
-        Log.d("aaaa",expandBean.getQuestions().get(i).getType());
-        return expandBean.getQuestions().get(i).getType();
+        return problemBean.getQuestions().get(i).getType();
     }
 
     @Override
@@ -71,7 +70,7 @@ public class MainExpListViewAdapter extends BaseExpandableListAdapter {
         } else {
             groupViewHolder = (GroupViewHolder) view.getTag();
         }
-        groupViewHolder.group_text.setText(expandBean.getTitle());
+        groupViewHolder.group_text.setText(problemBean.getTitle());
         if(b){
             groupViewHolder.group_image.setImageResource(R.drawable.jt_up);
         }else{
@@ -92,7 +91,7 @@ public class MainExpListViewAdapter extends BaseExpandableListAdapter {
         } else {
             childViewHolder = (ChildViewHolder) view.getTag();
         }
-        childViewHolder.child_text.setText(expandBean.getQuestions().get(i1).getType());
+        childViewHolder.child_text.setText(problemBean.getQuestions().get(i1).getType());
         return view;
     }
 

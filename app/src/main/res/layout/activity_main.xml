@@ -9,21 +9,21 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp">
+        android:layout_height="@dimen/heigh_title"
+        android:layout_marginTop="@dimen/title_top">
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/back_size"
+            android:layout_height="@dimen/back_size"
             android:src="@drawable/back"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="@dimen/back_left"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="常见问题"
-            android:textSize="20dp"
+            android:textSize="@dimen/back_size"
             android:textStyle="bold"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
@@ -38,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:groupIndicator="@null"
+        android:overScrollMode="never"
         android:childDivider="@android:color/transparent"/>
 
     <View
@@ -48,6 +49,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/problem_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:scrollbars="none" ></android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
