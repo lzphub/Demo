@@ -79,12 +79,8 @@ public class DPGeneratorLittle {
 
 
 //将给定 URI 的内容解析为一个 XML 文档,并返回Document对象
-
-
 //记得改成自己当前项目的路径
-
             document = db.parse(root + "values\\dimens.xml");
-
 //按文档顺序返回包含在文档中且具有给定标记名称的所有 Element 的 NodeList
 
             NodeList dimenList = document.getElementsByTagName("dimen");
