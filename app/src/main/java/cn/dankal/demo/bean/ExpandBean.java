@@ -3,6 +3,16 @@ package cn.dankal.demo.bean;
 import java.util.List;
 
 public class ExpandBean {
+
+    private static ExpandBean expandBean=null;
+
+    public static synchronized ExpandBean getExpandBean(){
+        if(expandBean==null){
+            expandBean=new ExpandBean();
+        }
+        return expandBean;
+    }
+
     private String title="问题分类";
     private List<ProblemBean.QuestionsBeanX> questions;
 

@@ -3,6 +3,16 @@ package cn.dankal.demo.bean;
 import java.util.List;
 
 public class ProblemBean {
+
+    private static ProblemBean problemBean=null;
+
+    public static synchronized ProblemBean getProblemBean(){
+        if(problemBean==null){
+            problemBean=new ProblemBean();
+        }
+        return problemBean;
+    }
+
     private String title;
 
     public String getTitle() {

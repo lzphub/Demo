@@ -28,8 +28,8 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
     @BindView(R.id.problem_recyclerview)
     RecyclerView problemRecyclerview;
     private ProblemPresnter probemPresenter = new ProblemPresnter();
-    private ProblemBean problemBean = new ProblemBean();
-    private ExpandBean expandBean = new ExpandBean();
+    private ProblemBean problemBean = ProblemBean.getProblemBean();
+    private ExpandBean expandBean = ExpandBean.getExpandBean();
 
 
     @Override
@@ -55,6 +55,7 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
         problemExplistview.setAdapter(new MainExpListViewAdapter(expandBean, this));
         int groupCount = problemExplistview.getCount();
         for (int i = 0; i < groupCount; i++) {
+            //默认展开
             problemExplistview.expandGroup(i);
         }
         ;
@@ -66,6 +67,7 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
                 mainRecyclerViewAdapter.setData(problemBean.getQuestions().get(i1));
                 for (int n = 0; n < groupCount; n++) {
+                    //点击关闭
                     problemExplistview.collapseGroup(n);
                 }
                 ;
