@@ -22,7 +22,7 @@ import retrofit2.Response;
 public class ProblemPresnter implements ProbemContact.ProbemPresenter{
 
     private ProbemContact.ProbemView probemView;
-    private ProblemBean problemBean2=new ProblemBean();
+    private ProblemBean problemBean2=ProblemBean.getProblemBean();
 
     @Override
     public void getData() {
