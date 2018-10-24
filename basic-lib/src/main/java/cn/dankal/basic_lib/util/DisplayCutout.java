@@ -24,5 +24,6 @@ public class DisplayCutout {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN;
         systemUiVisibility |= flags;
         activity.getWindow().getDecorView().setSystemUiVisibility(systemUiVisibility);
+
     }
 }

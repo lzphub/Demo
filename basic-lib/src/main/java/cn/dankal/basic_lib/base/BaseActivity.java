@@ -39,6 +39,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         if (contentViewLayoutResId() != 0) {
             DisplayCutout displayCutout=new DisplayCutout(this);
             displayCutout.openFullScreenModel();
+
             setContentView(contentViewLayoutResId());
 
             //ButterKnife绑定
