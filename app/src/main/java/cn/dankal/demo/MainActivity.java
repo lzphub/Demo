@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
         setStatusBarAndToolBar(true, true, 0);
         ViewGroup.LayoutParams layoutParams= (ViewGroup.LayoutParams) viewTop.getLayoutParams();
         layoutParams.height=probemPresenter.getStatusBarHeight(this);
+        
         viewTop.setLayoutParams(layoutParams);
         probemPresenter.getData();
     }
