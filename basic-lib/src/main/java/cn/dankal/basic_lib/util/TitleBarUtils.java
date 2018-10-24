@@ -1,7 +1,9 @@
 package cn.dankal.basic_lib.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -44,5 +46,16 @@ public class TitleBarUtils {
         mFrameLayout.addView(wraplayout);
 
         return titlebar;
+    }
+
+    //获取状态栏高度
+    public static int getStatusBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height","dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        Log.d("hwj","**getStatusBarHeight**" + result);
+        return result;
     }
 }

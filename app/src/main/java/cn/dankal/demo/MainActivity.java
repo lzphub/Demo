@@ -11,6 +11,7 @@ import android.widget.ExpandableListView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.dankal.basic_lib.base.BaseActivity;
+import cn.dankal.basic_lib.util.TitleBarUtils;
 import cn.dankal.demo.adapter.MainExpListViewAdapter;
 import cn.dankal.demo.adapter.MainRecyclerViewAdapter;
 import cn.dankal.demo.bean.ProblemBean;
@@ -25,8 +26,7 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
     RecyclerView problemRecyclerview;
     @BindView(R.id.view_top)
     View viewTop;
-    private ProblemPresnter probemPresenter = new ProblemPresnter();
-    private ProblemBean problemBean = ProblemBean.getProblemBean();
+    private ProblemPresnter probemPresenter = ProblemPresnter.getProblemPresnter();
     private MainRecyclerViewAdapter mainRecyclerViewAdapter;
 
     @Override
@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
         probemPresenter.attachView(this);
         setStatusBarAndToolBar(true, true, 0);
         ViewGroup.LayoutParams layoutParams= (ViewGroup.LayoutParams) viewTop.getLayoutParams();
-        layoutParams.height=probemPresenter.getStatusBarHeight(this);
+        layoutParams.height= TitleBarUtils.getStatusBarHeight(this);
         viewTop.setLayoutParams(layoutParams);
         probemPresenter.getData();
     }
@@ -48,31 +48,25 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
 
     //数据填充显示
     @Override
-    public void getDataSuccess() {
-        problemBean = probemPresenter.getProblemBean2();
-        problemBean.setTitle("问题分类");
-        problemExplistview.setAdapter(new MainExpListViewAdapter(problemBean, this));
-        problemRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(problemBean.getQuestions().get(0), this);
-        problemRecyclerview.setAdapter(mainRecyclerViewAdapter);
-        //默认展开
-        problemExplistview.expandGroup(0);
+    public void getDataSuccess(ProblemBean problemBean) {
+        if(problemBean!=null){
+            problemBean.setTitle("问题分类");
+            problemExplistview.setAdapter(new MainExpListViewAdapter(problemBean, this));
+            problemRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mainRecyclerViewAdapter = new MainRecyclerViewAdapter(problemBean.getQuestions().get(0), this);
+            problemRecyclerview.setAdapter(mainRecyclerViewAdapter);
+            //默认展开
+            problemExplistview.expandGroup(0);
 
-        problemExplistview.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-                mainRecyclerViewAdapter.setData(problemBean.getQuestions().get(i1));
-                //点击关闭
-                problemExplistview.collapseGroup(0);
-                return false;
-            }
-        });
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+            problemExplistview.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                @Override
+                public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+                    mainRecyclerViewAdapter.setData(problemBean.getQuestions().get(i1));
+                    //点击关闭
+                    problemExplistview.collapseGroup(0);
+                    return false;
+                }
+            });
+        }
     }
 }

@@ -23,7 +23,14 @@ import retrofit2.Response;
 public class ProblemPresnter implements ProbemContact.ProbemPresenter{
 
     private ProbemContact.ProbemView probemView;
-    private ProblemBean problemBean2=ProblemBean.getProblemBean();
+    private static ProblemPresnter problemPresnter=null;
+
+    public static synchronized ProblemPresnter getProblemPresnter(){
+        if(problemPresnter==null){
+            problemPresnter=new ProblemPresnter();
+        }
+        return problemPresnter;
+    }
 
     @Override
     public void getData() {
@@ -38,8 +45,7 @@ public class ProblemPresnter implements ProbemContact.ProbemPresenter{
                 .subscribe(new PreHandlerDialogSubscriber<ProblemBean>(probemView) {
                     @Override
                     public void onNext(ProblemBean problemBean) {
-                        problemBean2=problemBean;
-                        probemView.getDataSuccess();
+                        probemView.getDataSuccess(problemBean);
                     }
                 });
 
@@ -55,18 +61,4 @@ public class ProblemPresnter implements ProbemContact.ProbemPresenter{
         probemView=null;
     }
 
-    public ProblemBean getProblemBean2(){
-        return problemBean2;
-    }
-
-    //获取状态栏高度
-    public int getStatusBarHeight(Context context) {
-        int result = 0;
-        int resourceId = context.getResources().getIdentifier("status_bar_height","dimen", "android");
-        if (resourceId > 0) {
-            result = context.getResources().getDimensionPixelSize(resourceId);
-        }
-        Log.d("hwj","**getStatusBarHeight**" + result);
-        return result;
-    }
 }
