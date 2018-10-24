@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="btn">44.44dp</dimen>
+	<dimen name="heigh_title">55.56dp</dimen>
+	<dimen name="back_size">22.22dp</dimen>
+	<dimen name="back_left">11.11dp</dimen>
+	<dimen name="chile_item_texe_size">16.67dp</dimen>
+	<dimen name="item_size">55.56dp</dimen>
+	<dimen name="title_top">26.67dp</dimen>
+</resources>
