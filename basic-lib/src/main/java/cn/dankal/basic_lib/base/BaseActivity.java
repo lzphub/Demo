@@ -1,5 +1,6 @@
 package cn.dankal.basic_lib.base;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -37,9 +38,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (contentViewLayoutResId() != 0) {
-            DisplayCutout displayCutout=new DisplayCutout(this);
-            displayCutout.openFullScreenModel();
-
+            if(Build.VERSION.SDK_INT>=28){
+                DisplayCutout displayCutout=new DisplayCutout(this);
+                displayCutout.openFullScreenModel();
+            }
             setContentView(contentViewLayoutResId());
 
             //ButterKnife绑定
