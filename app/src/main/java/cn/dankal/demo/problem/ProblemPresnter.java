@@ -1,5 +1,6 @@
 package cn.dankal.demo.problem;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -56,5 +57,16 @@ public class ProblemPresnter implements ProbemContact.ProbemPresenter{
 
     public ProblemBean getProblemBean2(){
         return problemBean2;
+    }
+
+    //获取状态栏高度
+    public int getStatusBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height","dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        Log.d("hwj","**getStatusBarHeight**" + result);
+        return result;
     }
 }

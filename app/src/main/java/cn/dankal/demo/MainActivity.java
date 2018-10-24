@@ -1,26 +1,21 @@
 package cn.dankal.demo;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.dankal.basic_lib.base.BaseActivity;
 import cn.dankal.demo.adapter.MainExpListViewAdapter;
 import cn.dankal.demo.adapter.MainRecyclerViewAdapter;
-import cn.dankal.demo.bean.ExpandBean;
 import cn.dankal.demo.bean.ProblemBean;
 import cn.dankal.demo.problem.ProbemContact;
 import cn.dankal.demo.problem.ProblemPresnter;
-import cn.dankal.demo.user.LoginActivity;
-import io.reactivex.disposables.Disposable;
 
 public class MainActivity extends BaseActivity implements ProbemContact.ProbemView {
 
@@ -28,6 +23,8 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
     ExpandableListView problemExplistview;
     @BindView(R.id.problem_recyclerview)
     RecyclerView problemRecyclerview;
+    @BindView(R.id.view_top)
+    View viewTop;
     private ProblemPresnter probemPresenter = new ProblemPresnter();
     private ProblemBean problemBean = ProblemBean.getProblemBean();
     private MainRecyclerViewAdapter mainRecyclerViewAdapter;
@@ -41,8 +38,13 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
     protected void initComponents() {
         probemPresenter.attachView(this);
         setStatusBarAndToolBar(true, true, 0);
+        ViewGroup.LayoutParams layoutParams= (ViewGroup.LayoutParams) viewTop.getLayoutParams();
+        layoutParams.height=probemPresenter.getStatusBarHeight(this);
+        viewTop.setLayoutParams(layoutParams);
         probemPresenter.getData();
     }
+
+
 
     //数据填充显示
     @Override
@@ -65,5 +67,12 @@ public class MainActivity extends BaseActivity implements ProbemContact.ProbemVi
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

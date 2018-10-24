@@ -18,6 +18,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 import butterknife.ButterKnife;
 import cn.dankal.basic_lib.R;
+import cn.dankal.basic_lib.util.DisplayCutout;
 import cn.dankal.basic_lib.util.TitleBarUtils;
 import cn.dankal.basic_lib.util.ToastUtil;
 import io.reactivex.disposables.CompositeDisposable;
@@ -36,6 +37,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (contentViewLayoutResId() != 0) {
+            DisplayCutout displayCutout=new DisplayCutout(this);
+            displayCutout.openFullScreenModel();
             setContentView(contentViewLayoutResId());
 
             //ButterKnife绑定
